@@ -58,6 +58,30 @@ export class SearchPageComponent implements OnInit {
     console.log("Final Search", searchValue)
   }
 
+  searchApiCall() {
+    if (this.searchForm.controls.searchBar.value) {
+      let strings = this.searchForm.controls.searchBar.value.split(/[/@#$]/);
+      console.log("Strings", strings);
+      strings.shift()
+      if (strings.length > 0 && this.searchForm.controls.searchBar.value.includes("/")) {
+        this.searchForm.controls.firstName.setValue(strings[0]);
+        strings.shift();
+      }
+      if (strings.length > 0 && this.searchForm.controls.searchBar.value.includes("@")) {
+        this.searchForm.controls.lastName.setValue(strings[0]);
+        strings.shift();
+      }
+      if (strings.length > 0 && this.searchForm.controls.searchBar.value.includes("#")) {
+        this.searchForm.controls.ChartNumber.setValue(strings[0]);
+        strings.shift();
+      }
+      if (strings.length > 0 && this.searchForm.controls.searchBar.value.includes("$")) {
+        this.searchForm.controls.address.setValue(strings[0]);
+        strings.shift();
+      }
+    }
+  }
+
   clear() {
     this.searchForm.controls.firstName.setValue(null);
     this.searchForm.controls.lastName.setValue(null);

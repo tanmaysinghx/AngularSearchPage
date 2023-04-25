@@ -53,7 +53,7 @@
                             <div class="row form-field">
                                 <mat-form-field appearance="fill" class="col-9">
                                     <mat-label>Search</mat-label>
-                                    <input matInput placeholder="Search" formControlName="searchBar">
+                                    <input matInput placeholder="Search" formControlName="searchBar" (keydown.enter)="searchApiCall()" (focusout)="searchApiCall()">
                                 </mat-form-field>
                                 <div class="col-1">
                                     <button mat-flat-button color="primary">Search</button>
