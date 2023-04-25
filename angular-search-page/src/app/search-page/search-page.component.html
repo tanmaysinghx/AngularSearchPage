@@ -1,1 +1,112 @@
-<p>search-page works!</p>
+<div class="outer-card">
+    <div class="title">
+        <h2>Search patient</h2>
+    </div>
+    <div class="row">
+        <div class="col-4">
+            <form [formGroup]="searchForm" *ngIf="searchForm">
+                <mat-card>
+                    <mat-card-header>
+                        <mat-card-title>Search By</mat-card-title>
+                    </mat-card-header>
+                    <mat-card-content>
+                        <div class="row form-field">
+                            <mat-form-field appearance="fill">
+                                <mat-label>First Name /</mat-label>
+                                <input matInput placeholder="First Name" id="searchValue" formControlName="firstName"
+                                    (keydown.enter)="searchId()" (focusout)="searchId()">
+                            </mat-form-field>
+                        </div>
+                        <div class="row form-field">
+                            <mat-form-field appearance="fill">
+                                <mat-label>Last Name @</mat-label>
+                                <input matInput placeholder="Last Name" formControlName="lastName"
+                                    (keydown.enter)="searchId()" (focusout)="searchId()">
+                            </mat-form-field>
+                        </div>
+                        <div class="row form-field">
+                            <mat-form-field appearance="fill">
+                                <mat-label>Chart Number #</mat-label>
+                                <input matInput placeholder="Chart Number" formControlName="ChartNumber"
+                                    (keydown.enter)="searchId()" (focusout)="searchId()">
+                            </mat-form-field>
+                        </div>
+                        <div class="row form-field">
+                            <mat-form-field appearance="fill">
+                                <mat-label>Address $</mat-label>
+                                <input matInput placeholder="Address" formControlName="address"
+                                    (keydown.enter)="searchId()" (focusout)="searchId()">
+                            </mat-form-field>
+                        </div>
+                    </mat-card-content>
+                </mat-card>
+            </form>
+        </div>
+        <div class="col-7">
+            <div class="">
+                <form [formGroup]="searchForm" *ngIf="searchForm">
+                    <mat-card>
+                        <mat-card-header>
+                            <mat-card-title>Search</mat-card-title>
+                        </mat-card-header>
+                        <mat-card-content>
+                            <div class="row form-field">
+                                <mat-form-field appearance="fill" class="col-9">
+                                    <mat-label>Search</mat-label>
+                                    <input matInput placeholder="Search" formControlName="searchBar">
+                                </mat-form-field>
+                                <div class="col-1">
+                                    <button mat-flat-button color="primary">Search</button>
+                                </div>
+                                <div class="col-1">
+                                    <button mat-flat-button color="warn" (click)="clear()">Clear</button>
+                                </div>
+                            </div>
+                        </mat-card-content>
+                    </mat-card>
+                </form>
+            </div>
+
+            <div class="pt-4">
+                <mat-card>
+                    <mat-card-header>
+                        <mat-card-title>Results</mat-card-title>
+                    </mat-card-header>
+                    <mat-card-content>
+                        <div class="row form-field">
+                            <table matSort>
+                                <caption></caption>
+                                <tr>
+                                    <th mat-sort-header="name">First Name</th>
+                                    <th mat-sort-header="calories">Last Name</th>
+                                    <th mat-sort-header="fat">Chart Number</th>
+                                    <th mat-sort-header="carbs">Address</th>
+                                </tr>
+
+                                <tr *ngFor="let search of search">
+                                    <td>{{search.firstName}}</td>
+                                    <td>{{search.lastName}}</td>
+                                    <td>{{search.ChartNumber}}</td>
+                                    <td>{{search.address}}</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </mat-card-content>
+                </mat-card>
+            </div>
+
+            <div class="pt-4">
+                <mat-card>
+                    <div class="row">
+                        <div class="col-1">
+                            <button mat-flat-button color="primary">Search</button>
+                        </div>
+                        <div class="col-1">
+                            <button mat-flat-button color="warn" (click)="clear()">Cancel</button>
+                        </div>
+                    </div>
+                </mat-card>
+            </div>
+        </div>
+    </div>
+</div>

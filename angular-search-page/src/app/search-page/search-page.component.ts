@@ -1,4 +1,12 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
+
+export interface Search {
+  firstName: any;
+  lastName: any;
+  ChartNumber: any;
+  address: any;
+}
 
 @Component({
   selector: 'app-search-page',
@@ -7,9 +15,55 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SearchPageComponent implements OnInit {
 
+  searchForm!: FormGroup;
+  searchValue: any;
+
+  search: Search[] = [
+    {firstName: 'Dummy', lastName: "Dummy", ChartNumber: "12345", address: "XYZ STREET"},
+  ];
+
+
   constructor() { }
 
   ngOnInit(): void {
+    this.createLoginForm();
+  }
+
+  createLoginForm() {
+    this.searchForm = new FormGroup({
+      firstName: new FormControl(''),
+      lastName: new FormControl(''),
+      ChartNumber: new FormControl(''),
+      address: new FormControl(''),
+      searchBar: new FormControl('')
+    });
+  }
+
+  searchId() {
+    console.log("Form", this.searchForm.controls);
+    let searchValue: any = "";
+    if (this.searchForm.controls.firstName.value) {
+      searchValue = searchValue + "/" + this.searchForm.controls.firstName.value
+    }
+    if (this.searchForm.controls.lastName.value) {
+      searchValue = searchValue + "@" + this.searchForm.controls.lastName.value
+    }
+    if (this.searchForm.controls.ChartNumber.value) {
+      searchValue = searchValue + "#" + this.searchForm.controls.ChartNumber.value
+    }
+    if (this.searchForm.controls.address.value) {
+      searchValue = searchValue + "$" + this.searchForm.controls.address.value
+    }
+    this.searchForm.controls.searchBar.setValue(searchValue)
+    console.log("Final Search", searchValue)
+  }
+
+  clear() {
+    this.searchForm.controls.firstName.setValue(null);
+    this.searchForm.controls.lastName.setValue(null);
+    this.searchForm.controls.ChartNumber.setValue(null);
+    this.searchForm.controls.address.setValue(null);
+    this.searchForm.controls.searchBar.setValue(null);
   }
 
 }
